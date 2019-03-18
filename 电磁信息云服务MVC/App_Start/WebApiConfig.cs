@@ -17,7 +17,7 @@ namespace 电磁信息云服务MVC
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{action}/{id}",
-                defaults: new { ontroller = "Default", action = "Test",id = RouteParameter.Optional }
+                defaults: new { controller = "default", action = "Test",id = RouteParameter.Optional }
             );
         }
     }

@@ -1,0 +1,171 @@
+﻿@{
+    Layout = "~/Views/Shared/_SunLayout.cshtml";
+    ViewBag.smallTitle = "DSG监测网关";
+    ViewBag.haveAttentionSpan = false;
+}
+@section head{
+    <style>
+        [v-cloak]{
+            display:none
+        }
+        .a_netIn {
+            margin-left: 10px;
+            color: cornflowerblue
+        }
+
+        .a_netOut {
+            color: cornflowerblue;
+          
+        }
+
+        .a_powOn {
+            color: green
+        }
+
+        .a_powOff {
+            color: red;
+            margin-left: 10px;
+        }
+    </style>
+
+}
+<div class="layui-fluid layadmin-fluid">
+    <div class="layui-row layui-col-space5">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                监测网关列表
+                <div class="layui-btn-group" style="margin-left: 20px;">
+                    @*<button class="layui-btn layui-btn-primary layui-btn-sm" id="btn_sysKeyAndValueAdd">
+                            <i class="layui-icon">&#xe654;</i>
+                        </button>*@
+                    <button class="layui-btn layui-btn-primary layui-btn-sm" id="btnGetDeviceList">
+                        <i class="layui-icon">&#xe669;</i>
+                    </button>
+                </div>
+            </div>
+            <div class="layui-card-body">
+                <table class="layui-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 80px;">序号</th>
+                            <th style="width: 100px;">设备ID</th>
+                            <th style="width: 100px;">网络</th>
+                            <th style="width: 100px;">电源</th>
+                            <th style="width: 100px;">经度</th>
+                            <th style="width: 100px;">纬度</th>
+                            <th style="width: 100px;">电压</th>
+                            <th style="width: 200px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="deviceList">
+                        <tr v-cloak v-for="data in datalist">
+                            <td>
+                                {{data.index}}
+                            </td>
+                            <td>
+                                {{data.deviceId}}
+                            </td>
+                            <td>
+                                {{data.net}}
+                            </td>
+                            <td>
+                                {{data.power}}
+                            </td>
+                            <td>
+                                {{data.lon}}
+                            </td>
+                            <td>
+                                {{data.lat}}
+                            </td>
+                            <td>
+                                {{data.voltage}}
+                            </td>
+                            <td>
+                                <div>
+                                    <a href="javascript:;" class="a_netOut" @@click="btnNetOut(data)">外网</a>
+                                    <a href="javascript:;" class="a_netIn" @@click="btnNetIn(data)">内网</a>
+                                </div>
+                                <div style="padding-top:10px">
+                                    <a href="javascript:;" class="a_powOn" @@click="btnPowerOn(data)">开电</a>
+                                    <a href="javascript:;" class="a_powOff" @@click="btnPowerOff(data)">关电</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#btnGetDeviceList").click(function () {
+        getDeviceList();
+    });
+    function msgBox(str) {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                title: '提示',
+                content: str
+            });
+        });
+    }
+    var app = new Vue({
+        el: "#deviceList",
+        data: {
+            datalist:[]
+        },
+        created() {
+            getDeviceList();
+        },
+        methods: {
+            btnNetOut(data) {
+
+            },
+            btnNetIn(data) {
+
+            },
+            btnPowerOn(data) {
+
+            },
+            btnPowerOff(data) {
+
+            }
+        }
+    });
+    function getDeviceList() {
+        layer.load(3, {
+            time: 10 * 1000
+        });
+        fetch("../api/default/GetDSGWGDeviceList")
+            .then(response => response.json())
+            .then(json => {
+                if (json.Result) {
+                    if (json.Data != null) {
+                        var list = new Array();
+                        for (var i = 0; i < json.Data.length; i++) {
+                            var tmp = json.Data[i];
+                            var DeviceID = tmp.DeviceID;
+                            var DSGWGstatus = tmp.DSGWGstatus;
+                            var d = {
+                                "index": i + 1,
+                                "deviceId": DeviceID,
+                                "net": (DSGWGstatus.net == "none" ? "未知" : (DSGWGstatus.net == "in"?"内网":"外网")),
+                                "power": (DSGWGstatus.power == "none" ? "未知" : (DSGWGstatus.power == "on" ? "开电" : "断电")),
+                                "lon": DSGWGstatus.lon,
+                                "lat": DSGWGstatus.lat,
+                                "voltage": DSGWGstatus.voltage
+                            };
+                            list.push(d);
+                        }
+                        this.app.datalist = list;
+                    } else {
+                        msgBox("没有任何数据");
+                    }
+                } else {
+                    msgBox(json.Msg);
+                }
+            });
+        layer.closeAll();
+    }
+</script>
