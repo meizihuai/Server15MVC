@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using 电磁信息云服务MVC.Areas.HelpPage.ModelDescriptions;
+using DianCiXinXiYunFuWuMVC.Areas.HelpPage.ModelDescriptions;
 
-namespace 电磁信息云服务MVC.Areas.HelpPage.Models
+namespace DianCiXinXiYunFuWuMVC.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.

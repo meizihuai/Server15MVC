@@ -7,7 +7,7 @@ using MySql;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
-namespace 电磁信息云服务MVC
+namespace DianCiXinXiYunFuWuMVC
 {
     public class MysqlHelper
     {

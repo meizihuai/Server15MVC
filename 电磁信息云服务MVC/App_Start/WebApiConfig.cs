@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace 电磁信息云服务MVC
+namespace DianCiXinXiYunFuWuMVC
 {
     public static class WebApiConfig
     {

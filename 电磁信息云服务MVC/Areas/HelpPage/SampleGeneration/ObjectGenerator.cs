@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace 电磁信息云服务MVC.Areas.HelpPage
+namespace DianCiXinXiYunFuWuMVC.Areas.HelpPage
 {
     /// <summary>
     /// This class will create an object of a given type and populate it with sample data.

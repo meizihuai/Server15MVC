@@ -1,4 +1,4 @@
-namespace 电磁信息云服务MVC.Areas.HelpPage
+namespace DianCiXinXiYunFuWuMVC.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

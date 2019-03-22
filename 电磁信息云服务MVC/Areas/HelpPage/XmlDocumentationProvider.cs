@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
-using 电磁信息云服务MVC.Areas.HelpPage.ModelDescriptions;
+using DianCiXinXiYunFuWuMVC.Areas.HelpPage.ModelDescriptions;
 
-namespace 电磁信息云服务MVC.Areas.HelpPage
+namespace DianCiXinXiYunFuWuMVC.Areas.HelpPage
 {
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.

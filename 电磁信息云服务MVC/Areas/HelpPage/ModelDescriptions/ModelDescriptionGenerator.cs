@@ -11,7 +11,7 @@ using System.Web.Http.Description;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
-namespace 电磁信息云服务MVC.Areas.HelpPage.ModelDescriptions
+namespace DianCiXinXiYunFuWuMVC.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Generates model descriptions for given types.

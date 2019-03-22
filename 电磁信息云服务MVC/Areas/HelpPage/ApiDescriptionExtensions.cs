@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace 电磁信息云服务MVC.Areas.HelpPage
+namespace DianCiXinXiYunFuWuMVC.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace 电磁信息云服务MVC.Areas.HelpPage
+namespace DianCiXinXiYunFuWuMVC.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {

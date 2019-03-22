@@ -1,6 +1,6 @@
 using System;
 
-namespace 电磁信息云服务MVC.Areas.HelpPage.ModelDescriptions
+namespace DianCiXinXiYunFuWuMVC.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Use this attribute to change the name of the <see cref="ModelDescription"/> generated for a type.

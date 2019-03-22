@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace 电磁信息云服务MVC
+namespace DianCiXinXiYunFuWuMVC
 {
     public class WebApiApplication : System.Web.HttpApplication
     {

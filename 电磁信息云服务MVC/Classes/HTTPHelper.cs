@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Web;
 
-namespace 电磁信息云服务MVC
+namespace DianCiXinXiYunFuWuMVC
 {
     public class HTTPHelper
     {

@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using 电磁信息云服务MVC.Areas.HelpPage.ModelDescriptions;
-using 电磁信息云服务MVC.Areas.HelpPage.Models;
+using DianCiXinXiYunFuWuMVC.Areas.HelpPage.ModelDescriptions;
+using DianCiXinXiYunFuWuMVC.Areas.HelpPage.Models;
 
-namespace 电磁信息云服务MVC.Areas.HelpPage
+namespace DianCiXinXiYunFuWuMVC.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

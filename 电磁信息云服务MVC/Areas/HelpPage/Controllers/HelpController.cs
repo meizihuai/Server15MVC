@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using 电磁信息云服务MVC.Areas.HelpPage.ModelDescriptions;
-using 电磁信息云服务MVC.Areas.HelpPage.Models;
+using DianCiXinXiYunFuWuMVC.Areas.HelpPage.ModelDescriptions;
+using DianCiXinXiYunFuWuMVC.Areas.HelpPage.Models;
 
-namespace 电磁信息云服务MVC.Areas.HelpPage.Controllers
+namespace DianCiXinXiYunFuWuMVC.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

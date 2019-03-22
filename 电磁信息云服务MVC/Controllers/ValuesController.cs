@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace 电磁信息云服务MVC.Controllers
+namespace DianCiXinXiYunFuWuMVC.Controllers
 {
     public class ValuesController : ApiController
     {
