@@ -19,8 +19,9 @@ namespace DianCiXinXiYunFuWuMVC.Controllers
     /// </summary>
     public class DefaultController : ApiController
     {
-        private MysqlHelper mysql = Module.mysql;
-        private string serverUrl = "http://127.0.0.1:8080/";
+        private readonly MysqlHelper mysql = Module.mysql;
+        private readonly string serverUrl = WebConfigurationManager.AppSettings["serverUrl"];
+        private readonly string token = "928453310";
         /// <summary>
         /// 网络测试，接口返回值测试，等
         /// </summary>
@@ -200,6 +201,72 @@ namespace DianCiXinXiYunFuWuMVC.Controllers
             {
                 return new NormalResponse(false, e.ToString());
             }
+        }
+        /// <summary>
+        /// 设置监测网关状态
+        /// </summary>
+        /// <param name="deviceId">设备ID</param>
+        /// <param name="key">状态名称</param>
+        /// <param name="value">状态值</param>
+        /// <returns></returns>
+        [HttpGet]
+        public NormalResponse SetGateWayStatus(string deviceId,string key,string value)
+        {         
+            try
+            {             
+                string url = HTTPHelper.GetH(serverUrl, "?func=GetHttpMsgUrlById&deviceID=" + deviceId + "&token=" + token);
+                if (url == "")
+                {
+                    return new NormalResponse(false, "设备不在线");
+                }
+                string result = "";
+                string param= "";
+                if (key == "power")
+                {
+                    param = (value == "off" ? "func=poweroff" : "func=poweron");                   
+                }
+                if (key == "net")
+                {
+                    param = (value == "in" ? "func=netswitchin" : "func=netswitchout");
+                }
+                if (param == "")
+                {
+                    return new NormalResponse(true, "未知命令！");
+                }
+                param = param + "&token=" + token;
+                url = url + "?" + param;
+                result = HTTPHelper.GetH(url, "");
+                if (GetNorResult("result", result) == "success")
+                {
+                    return new NormalResponse(true, "操作成功！", url);
+                }
+                else
+                {
+                    return new NormalResponse(true, "操作失败！"+ GetNorResult("msg", result), url);
+                }
+            }
+            catch (Exception e)
+            {
+                return new NormalResponse(false, e.ToString());
+            }
+        }
+        //获取旧版NorResult result=success;msg=这是消息;
+        private string GetNorResult(string key,string str)
+        {
+            if (!str.Contains(";")) return "";
+            foreach(string itm in str.Split(';'))
+            {
+                if (itm.Contains("="))
+                {
+                    string k = itm.Split('=')[0];
+                    string v = itm.Split('=')[1];
+                    if (k == key)
+                    {
+                        return v;
+                    }
+                }
+            }
+            return "";
         }
     }
 }

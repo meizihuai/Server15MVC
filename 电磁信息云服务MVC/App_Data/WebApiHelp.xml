@@ -551,5 +551,14 @@
             <param name="deviceId">设备ID</param>
             <returns></returns>
         </member>
+        <member name="M:DianCiXinXiYunFuWuMVC.Controllers.DefaultController.SetGateWayStatus(System.String,System.String,System.String)">
+            <summary>
+            设置监测网关状态
+            </summary>
+            <param name="deviceId">设备ID</param>
+            <param name="key">状态名称</param>
+            <param name="value">状态值</param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

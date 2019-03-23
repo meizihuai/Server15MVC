@@ -5,9 +5,10 @@
 }
 @section head{
     <style>
-        [v-cloak]{
-            display:none
+        [v-cloak] {
+            display: none
         }
+
         .a_netIn {
             margin-left: 10px;
             color: cornflowerblue
@@ -15,7 +16,6 @@
 
         .a_netOut {
             color: cornflowerblue;
-          
         }
 
         .a_powOn {
@@ -27,7 +27,6 @@
             margin-left: 10px;
         }
     </style>
-
 }
 <div class="layui-fluid layadmin-fluid">
     <div class="layui-row layui-col-space5">
@@ -113,28 +112,75 @@
     var app = new Vue({
         el: "#deviceList",
         data: {
-            datalist:[]
+            datalist: []
         },
         created() {
             getDeviceList();
         },
         methods: {
+            SetGateWayStatus(d) {
+                $.get("/api/default/SetGateWayStatus", d, function (data) {
+                    if (data.Result) {
+                        getDeviceListAsync();
+                    } else {
+                        msgBox(data.Msg);
+                    }
+                }, "json");
+            },
             btnNetOut(data) {
-
+                var d = {
+                    "deviceId": data.deviceId,
+                    "key": "net",
+                    "value": "out",
+                };
+                this.SetGateWayStatus(d);
             },
             btnNetIn(data) {
-
+                var d = {
+                    "deviceId": data.deviceId,
+                    "key": "net",
+                    "value": "in",
+                }
+                this.SetGateWayStatus(d);
             },
             btnPowerOn(data) {
-
+                var d = {
+                    "deviceId": data.deviceId,
+                    "key": "power",
+                    "value": "on",
+                }
+                this.SetGateWayStatus(d);
             },
             btnPowerOff(data) {
-
+                var d = {
+                    "deviceId": data.deviceId,
+                    "key": "power",
+                    "value": "off",
+                }
+                this.SetGateWayStatus(d);
             }
         }
     });
-    function getDeviceList() {
-        layer.load(3, {
+    function sleep(delay) {
+        var start = (new Date()).getTime();
+        while ((new Date()).getTime() - start < delay) {
+            continue;
+        }
+    }
+    function sleepAsync(delay, callback) {
+        var timer = setInterval(function () {
+            callback();
+            clearInterval(timer);
+        }, delay);
+    }
+    function getDeviceListAsync() {
+        var index = layer.load(2, {
+            time: 10 * 1000
+        });
+        sleepAsync(3000, getDeviceList);
+    }
+    function getDeviceList() {         
+        var index=layer.load(3, {
             time: 10 * 1000
         });
         fetch("../api/default/GetDSGWGDeviceList")
@@ -150,7 +196,7 @@
                             var d = {
                                 "index": i + 1,
                                 "deviceId": DeviceID,
-                                "net": (DSGWGstatus.net == "none" ? "未知" : (DSGWGstatus.net == "in"?"内网":"外网")),
+                                "net": (DSGWGstatus.net == "none" ? "未知" : (DSGWGstatus.net == "in" ? "内网" : "外网")),
                                 "power": (DSGWGstatus.power == "none" ? "未知" : (DSGWGstatus.power == "on" ? "开电" : "断电")),
                                 "lon": DSGWGstatus.lon,
                                 "lat": DSGWGstatus.lat,
@@ -166,6 +212,7 @@
                     msgBox(json.Msg);
                 }
             });
-        layer.closeAll();
+         layer.closeAll();
+        // layer.close(index);
     }
 </script>
